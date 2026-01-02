@@ -1,0 +1,21 @@
+name: first
+on: [push]
+jobs:
+  build-enviroment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: revisar-repo
+        uses: actions/checkout@v4
+      - name: descargar entorno .Net
+        uses: actions/setup-dotnet@v4
+        with: 
+          dotnet-version: '8.0.x'
+      - name: desargar dependencias del proyecto
+        run: dotnet restore
+      - name: compilar proyecto
+        run: dotnet build --no-restore
+      - name: testear proyecto
+        run: dotnet test --no-build --no-restore
+      
+      
+  
